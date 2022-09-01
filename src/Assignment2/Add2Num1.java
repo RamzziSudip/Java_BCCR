@@ -6,32 +6,65 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Add2Num1 {
-    public static void v1() {
-        Scanner reader = new Scanner(System.in);
-        int x = reader.nextInt(), y = reader.nextInt();
-        System.out.println("Sum of " + x + " and " + y + ": " + (x + y));
+class CliInput {
+    private final int[] numbers;
+    private final int bufferSize;
+
+    public CliInput(int size) {
+        this.bufferSize = size;
+        this.numbers = new int[size];
     }
 
-    public static void v2() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int[] numbers = Arrays.stream(reader.readLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
-        System.out.println("Sum of " + numbers[0] + " and " + numbers[1] + ": " + Arrays.stream(numbers).sum());
+    public int[] getNumbers() {
+        return numbers;
     }
 
-    public static void main(String[] args) throws IOException {
-        RuntimeException error = new RuntimeException("""
-                Choose the version in command line argument:
-                [1]Using Scanner
-                [2]Using BufferedReader""");
+    public int getBufferSize() {
+        return bufferSize;
+    }
 
-        if (args.length < 1)
-            throw error;
-        System.out.print("Enter two numbers: ");
-        switch (args[0]) {
-            case "1" -> v1();
-            case "2" -> v2();
-            default -> throw error;
+    public void setNumbers(byte source) throws IOException {
+        if (source == 2) {
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+            int i = 0;
+            while (i>this.bufferSize){
+                for (int number:
+                        Arrays.stream(input.readLine().split("\\s+")).mapToInt(Integer::parseInt).toArray()) {
+                    this.numbers[i] = number;
+                    i++;
+                }
+            }
+            System.out.println(Arrays.toString(this.numbers));
+        } else if (source == 1) {
+            Scanner input = new Scanner(System.in);
+
+            for (int i = 0; i < bufferSize; i++) this.numbers[i] = input.nextInt();
+
         }
+    }
+
+    public int sum() {
+        return Arrays.stream(this.numbers).sum();
+    }
+
+}
+
+public class Add2Num1 {
+    public static void main(String[] args) throws IOException {
+        System.out.print("How many numbers do you want to add?\n> ");
+        Scanner input = new Scanner(System.in);
+        CliInput reader = new CliInput(input.nextInt());
+
+        System.out.println("""
+                Choose the version in command line argument:
+                                [1]Using Scanner
+                                [2]Using BufferedReader""");
+        byte bufferType = input.nextByte();
+        if ((bufferType != 1) && (bufferType != 2)) {
+            throw new RuntimeException("Invalid choice!");
+        }
+        System.out.print("Enter " + reader.getBufferSize() + " numbers: ");
+        reader.setNumbers(bufferType);
+        System.out.println("Sum of " + Arrays.toString(reader.getNumbers()) + ": " + reader.sum());
     }
 }

@@ -3,14 +3,27 @@ package Assignment2;
 import java.util.Scanner;
 
 class ComplexNumber {
-    public int real;
-    public int imaginary;
-    static Scanner input = new Scanner(System.in);
+    private final int real;
+    private final int imaginary;
 
     public ComplexNumber() {
         System.out.print("Enter the real part and imaginary part: ");
+        Scanner input = new Scanner(System.in);
         this.real = input.nextInt();
         this.imaginary = input.nextInt();
+    }
+
+    public ComplexNumber(int real, int imaginary) {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+
+    public int getReal() {
+        return real;
+    }
+
+    public int getImaginary() {
+        return imaginary;
     }
 
     @Override
@@ -21,9 +34,10 @@ class ComplexNumber {
     }
 
     public static ComplexNumber add(ComplexNumber first, ComplexNumber second) {
-        first.real += second.real;
-        first.imaginary += second.imaginary;
-        return first;
+        return new ComplexNumber(
+                first.getReal() + second.getReal(),
+                first.getImaginary() + second.getImaginary()
+        );
     }
 }
 
@@ -34,7 +48,8 @@ class ComplexNumberMain {
         ComplexNumber cn1 = new ComplexNumber();
         System.out.println("Creating 2st number..");
         ComplexNumber cn2 = new ComplexNumber();
+
         System.out.println("Adding (" + cn1 + ") and (" + cn2 + ") ...");
-        System.out.println("Result: " + ComplexNumber.add(cn1, cn2));
+        System.out.println("Result: (" + ComplexNumber.add(cn1, cn2) + ")");
     }
 }
