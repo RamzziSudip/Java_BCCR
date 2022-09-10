@@ -1,4 +1,4 @@
-package Assignment2;
+package assignment.two;
 
 class Demo {
     private int data;

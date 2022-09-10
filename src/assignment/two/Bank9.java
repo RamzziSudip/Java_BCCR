@@ -1,4 +1,4 @@
-package Assignment2;
+package assignment.two;
 
 class BankAccount {
     private static int nextAccNo = 1000000;

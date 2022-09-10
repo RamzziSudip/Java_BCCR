@@ -1,4 +1,4 @@
-package Assignment1;
+package assignment.one;
 
 class BinarySearch18 {
     public static void binarySearch(int[] arr, int first, int last, int key) {

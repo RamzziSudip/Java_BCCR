@@ -1,4 +1,4 @@
-package Assignment2;
+package assignment.two;
 
 class Tester {
     public static double pi;

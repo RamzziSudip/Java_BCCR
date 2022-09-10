@@ -1,4 +1,4 @@
-package Assignment1;
+package assignment.one;
 
 class Factorial8 {
     static int factorial(int n) {

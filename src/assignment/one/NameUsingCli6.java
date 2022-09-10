@@ -1,4 +1,4 @@
-package Assignment1;
+package assignment.one;
 
 public class NameUsingCli6 {
     public static void main(String[] args) {
