@@ -1,5 +1,7 @@
 package assignment.three;
 
+import java.util.Scanner;
+
 class EmployeeDynamic {
     private String name;
     private int id;
@@ -52,13 +54,25 @@ public class DynamicPrintString6 {
     }
 
     public static void main(String[] args) {
-
-        EmployeeDynamic emp = new EmployeeDynamic("Oskar Roy", 101);
-        EmployeeDynamic sci = new ScientistDynamic("Nayomi Smith", 150, 5, 1000);
-        EmployeeDynamic dSci = new DScientistDynamic("Sir Issac Newton", 1, 200, 120000, "Knighthood");
-
+        System.out.println("Enter your choice: ");
+        System.out.println("[1] Employee");
+        System.out.println("[2] Scientist");
+        System.out.print("[3] DScientis\n> ");
+      
+        EmployeeDynamic emp = new EmployeeDynamic("None", 0);
+      
+        int choice = new Scanner(System.in).nextInt();
+        if (choice == 1)
+          emp = new EmployeeDynamic("Oskar Roy", 101);
+        else if (choice == 2)
+          emp = new ScientistDynamic("Nayomi Smith", 150, 5, 1000);
+        else if (choice == 3)
+          emp = new DScientistDynamic("Sir Issac Newton", 1, 200, 120000, "Knighthood");
+        else
+        {
+          System.out.println("Invalid option");
+          System.exit(1);
+        }
         display(emp);
-        display(sci);
-        display(dSci);
     }
 }
